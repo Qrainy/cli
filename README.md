@@ -9,8 +9,8 @@ Span 脚手架
 | `create`       | span create `projectName` | 创建项目: 暂时 `vue3.0+vite+ts` 生成的模版 |
 | `husky`        | span add husky            | git 提交规范                               |
 | `mock`         | span add mock             | 模拟数据                                   |
-| `css reset`    | span add css-reset        | 样式格式化                                 |
-| `axios strong` | span add axios-strong     | 二次封装、规范 `api` 请求方式              |
+| `css-reset`    | span add css-reset        | 样式格式化                                 |
+| `axios-strong` | span add axios-strong     | 二次封装、规范 `api` 请求方式              |
 
 - 简易安装：直接使用`create` + 你的项目名称即可（包括`husky`、`mock`...，全功能）
 - 手动安装：手动选择配置文件。
@@ -30,13 +30,13 @@ Span 脚手架
 ## 安装
 
 ```
-yarn global add xxx
+yarn global add span-cli
 ```
 
 或者
 
 ```
-npm install -g xx
+npm install -g span-cli
 ```
 
 ## 创建应用
