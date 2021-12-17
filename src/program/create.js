@@ -2,6 +2,7 @@ const exists = require('fs').existsSync
 const download = require('../download')
 const inquirer = require('../inquirer')
 const chalk = require('chalk')
+const fsExtra = require('fs-extra')
 const loading = require('ora')('🚕  Downloading data, please wait...')
 
 class Main {
@@ -31,12 +32,13 @@ class Main {
   async isExistsSameFolder() {
     if (exists(this.name)) {
       const { isRemoveSameFile } = await inquirer.isRemoveSameFile(this.name)
+
       if (isRemoveSameFile) {
         fsExtra.removeSync(process.cwd() + '/' + this.name)
-        return false
+        return true
       }
     }
-    return true
+    return false
   }
 
   async setOptions() {

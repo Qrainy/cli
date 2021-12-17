@@ -7,7 +7,7 @@ function showVersion() {
 }
 
 function showLogo() {
-  figlet('Welcome Span-cli', (err, data) => {
+  figlet('Welcome To Span-cli', (err, data) => {
     if (err) {
       console.log('Something went wrong...')
       return

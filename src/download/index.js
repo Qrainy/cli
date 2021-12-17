@@ -1,6 +1,6 @@
 const download = require('download-git-repo')
 
-const gitHubUrl = 'direct:https://github.com/Qrainy/cli-vue-demo.git#master'
+const gitHubUrl = 'direct:git@github.com:Qrainy/cli-vue-demo.git#master'
 
 function main(projectName) {
   return new Promise((resolve, reject) => {
