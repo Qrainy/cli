@@ -17,7 +17,7 @@ function showLogo() {
 }
 
 function showStartUp(name) {
-  console.log(chalk.white('\nIf started：'))
+  console.log(chalk.white('\nHow to start：'))
   console.log(chalk.green(`cd ${name}`))
   console.log(chalk.green(`npm install or yarn install`))
   console.log(chalk.green(`npm run dev`))
