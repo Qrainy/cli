@@ -37,8 +37,9 @@ class Main {
         fsExtra.removeSync(process.cwd() + '/' + this.name)
         return true
       }
+      return false
     }
-    return false
+    return true
   }
 
   async setOptions() {
