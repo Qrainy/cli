@@ -12,7 +12,7 @@
     "span": "index.js"
   },
   "scripts": {
-    "publish": "npm publish --access=public"
+    "dev": "xx"
   },
   "repository": {
     "type": "git",

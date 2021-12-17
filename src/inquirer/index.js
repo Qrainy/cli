@@ -1,11 +1,12 @@
 const inquirer = require('inquirer')
+const chalk = require('chalk')
 
-function isRemoveSameFile() {
+function isRemoveSameFile(name) {
   return inquirer.prompt([
     {
       type: 'confirm',
       name: 'isRemoveSameFile',
-      message: '是否删除相同文件夹？'
+      message: `${name} folder already exists, Do you want to delete it?`
     }
   ])
 }
@@ -15,8 +16,17 @@ async function main() {
     {
       type: 'list',
       name: 'method',
-      message: '请选择自动还是手动？',
-      choices: ['automatic', 'manual']
+      message: 'Please pick a preset?',
+      choices: [
+        {
+          name: `Default （${chalk.yellow('[Vue 3 + ts] mock，husky...')}）`,
+          value: 'automatic'
+        },
+        {
+          name: 'Manual select features',
+          value: 'manual'
+        }
+      ]
     }
   ])
 
@@ -31,7 +41,7 @@ async function main() {
       {
         type: 'checkbox',
         name: 'tools',
-        message: '请选择以下工具？',
+        message: 'Please select the tools you will install?',
         choices: ['mock', 'husky', 'css-reset', 'axios-strong']
       }
     ])
