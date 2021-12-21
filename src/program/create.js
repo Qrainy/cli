@@ -4,6 +4,7 @@ const inquirer = require('../inquirer')
 const chalk = require('chalk')
 const fsExtra = require('fs-extra')
 const loading = require('ora')('🚕  Downloading data, please wait...')
+const { executeCommand } = require('../utils')
 
 class Main {
   constructor(name) {
@@ -12,7 +13,7 @@ class Main {
     this.status = true
   }
 
-  async init() {
+  async init () {
     let isContinue = await this.isExistsSameFolder()
 
     if (!isContinue) {
@@ -20,16 +21,17 @@ class Main {
     }
     await this.setOptions()
     await this.downloadDemo()
-
-    // TODO 工具正在建设中...
-    if (this.options && this.options.tools && this.status) {
-      console.log(chalk.yellowBright(this.options.tools + ' Under construction...'))
-    }
+    await this.execNpmInstall()
+    await this.injectPlugin()
 
     return this.status
   }
 
-  async isExistsSameFolder() {
+  /**
+   * 是否存在相同文件夹
+   * @returns {Boolean}  是否删除文件夹
+   */
+  async isExistsSameFolder () {
     if (exists(this.name)) {
       const { isRemoveSameFile } = await inquirer.isRemoveSameFile(this.name)
 
@@ -42,11 +44,17 @@ class Main {
     return true
   }
 
-  async setOptions() {
+  /**
+   * 设置用户配置
+   */
+  async setOptions () {
     this.options = await inquirer.main()
   }
 
-  async downloadDemo() {
+  /**
+   * 下载 gitee 的 Demo
+   */
+  async downloadDemo () {
     loading.start()
     try {
       await download(this.name)
@@ -56,6 +64,33 @@ class Main {
       console.error('\n' + chalk.red(err))
       loading.fail(chalk.red('Download failed'))
     }
+  }
+
+  /**
+   * 执行npm install
+   */
+  async execNpmInstall () {
+    await executeCommand('npm', ['install'], {
+      cwd: process.cwd() + '/' + this.name
+    })
+  }
+
+  /**
+   * 注入插件: mock、husky
+   */
+  async injectPlugin () {
+    const defaultTools = ['mock']
+    let tools = this.options.method === 'automatic' ? defaultTools : this.options.tools
+
+    // TODO 工具正在建设中... 'husky', 'css-reset', 'axios-strong'
+    // mock ✅ 
+    // husky ❌
+    // css-reset ❌
+    // axios-strong ❌
+    for (let key in tools) {
+      require(`./add/${tools[key]}`)
+    }
+
   }
 }
 

@@ -1,7 +1,7 @@
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 
-function isRemoveSameFile(name) {
+function isRemoveSameFile (name) {
   return inquirer.prompt([
     {
       type: 'confirm',
@@ -11,7 +11,7 @@ function isRemoveSameFile(name) {
   ])
 }
 
-async function main() {
+async function main () {
   const { method } = await inquirer.prompt([
     {
       type: 'list',

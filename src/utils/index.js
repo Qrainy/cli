@@ -1,31 +1,53 @@
 const chalk = require('chalk')
 const figlet = require('figlet')
+const execa = require('execa')
 const { version } = require('../../package.json')
+const log = console.log
 
-function showVersion() {
-  console.log(chalk.blue(`Span Cli v${version}`))
+function showVersion () {
+  log(chalk.blue(`Span Cli v${version}`))
 }
 
-function showLogo() {
+function showLogo () {
   figlet('Welcome To Span-cli', (err, data) => {
     if (err) {
-      console.log('Something went wrong...')
+      log('Something went wrong...')
       return
     }
-    console.log(chalk.green(data))
+    log(chalk.green(data))
   })
 }
 
-function showStartUp(name) {
-  console.log(chalk.white('\nHow to start：'))
-  console.log(chalk.green(`cd ${name}`))
-  console.log(chalk.green(`npm install or yarn install`))
-  console.log(chalk.green(`npm run dev`))
+function showStartUp (name) {
+  log()
+  log(chalk.white(`🎉  Successfully created project ${name}.`))
+  log(chalk.white('👉  Get started with the following commands: '))
+  log(chalk.green(`$ cd ${name}`))
+  log(chalk.green(`$ npm run dev`))
+}
+
+function executeCommand (command, args, options = {}) {
+  options = {
+    stdio: 'inherit',
+    ...options
+  }
+
+  return new Promise((resolve, reject) => {
+    execa(command, args, options)
+      .then(() => {
+        resolve(true)
+      })
+      .catch(() => {
+        reject(false)
+      })
+  })
 }
 
 module.exports = {
   showVersion,
   showLogo,
   showStartUp,
+  executeCommand,
+  log,
   version
 }

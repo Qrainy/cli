@@ -1,14 +1,12 @@
 const download = require('download-git-repo')
+const gitHubUrl = 'direct:https://gitee.com/Rainy_m/cli-vue-demo.git'
+const gitHubUrlSpare = 'direct:https://github.com/Qrainy/cli-vue-demo.git'
 
-const gitHubUrl = 'https://github.com/Qrainy/cli-vue-demo.git'
-const gitHubUrlSpare = 'direct:git@github.com:Qrainy/cli-vue-demo.git#master'
-
-function main(name) {
+function main (name) {
   return new Promise((resolve, reject) => {
-   
     downloadDemo(gitHubUrl)
 
-    function downloadDemo(url, isEnd = false) {
+    function downloadDemo (url, isEnd = false) {
       download(url, name, { clone: true }, function (err) {
         if (err) {
           if (isEnd) {
@@ -17,8 +15,9 @@ function main(name) {
             // 下载备用地址
             downloadDemo(gitHubUrlSpare, true)
           }
+        } else {
+          resolve('模板拉取成功~')
         }
-        resolve('模板拉取成功~')
       })
     }
   })
