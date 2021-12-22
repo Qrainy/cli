@@ -1,5 +1,6 @@
 
 const { execSync } = require('child_process')
+const path = require('path')
 
 
 function hasYarn () {
@@ -27,8 +28,13 @@ function hasPnpm () {
   }
 }
 
+function getRootPath () {
+  return path.resolve(__dirname, '../../src')
+}
+
 module.exports = {
   hasYarn,
   hasNpm,
-  hasPnpm
+  hasPnpm,
+  getRootPath
 }

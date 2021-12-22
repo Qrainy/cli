@@ -3,6 +3,14 @@ const execa = require('execa')
 const chalk = require('chalk')
 const { hasNpm, hasPnpm, hasYarn } = require('./utils.env')
 
+
+/**
+ * 执行命令
+ * @param {String} command 
+ * @param {Array} args 
+ * @param {Object} options 
+ * @returns 
+ */
 function executeCommand (command, args, options = {}) {
   options = {
     stdio: 'inherit',
@@ -43,7 +51,7 @@ async function installPlugins (plugins = '', cwd = process.cwd(), depend = '-D')
     })
     return
   }
-  await executeCommand(bin, [bin === 'yarn' ? 'add' : 'install', plugins, depend], {
+  await executeCommand(bin, [bin === 'yarn' ? 'add' : 'install', ...plugins.split(" "), depend], {
     cwd
   })
 }
