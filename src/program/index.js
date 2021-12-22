@@ -39,7 +39,12 @@ function commandAdd () {
         const classFn = require(`./add/${plugin}`)
         new classFn().init()
       } catch (err) {
-        log(err || (chalk.bgRed.white(' ERROR '), chalk.red("There is no such plug-in, Please don't be naughty 😝")))
+
+        if (err && err.code === 'MODULE_NOT_FOUND') {
+          log(chalk.bgRed.white(' ERROR '), chalk.red("There is no such plug-in, Please don't be naughty 😝"))
+        } else {
+          log(err)
+        }
       }
     })
 }

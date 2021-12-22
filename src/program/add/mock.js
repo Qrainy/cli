@@ -2,7 +2,7 @@ const chalk = require('chalk')
 const fsExt = require('fs-extra')
 const path = require('path')
 const exists = require('fs').existsSync
-const { executeCommand, log, isExistPackageFile } = require('../../utils')
+const { log, installPlugins } = require('../../utils')
 
 
 class Mock {
@@ -11,10 +11,7 @@ class Mock {
   }
 
   async init () {
-    isExistPackageFile(this.childProcessPath)
-    await executeCommand('npm', ['install', 'mock', '-D'], {
-      cwd: this.childProcessPath
-    })
+    await installPlugins('mockjs', this.childProcessPath)
     await this.startWriteFileToMock()
     this.showStartUp()
   }

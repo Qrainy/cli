@@ -1,12 +1,42 @@
 const chalk = require('chalk')
-const { executeCommand } = require('../../utils')
+const fsExt = require('fs-extra')
+const path = require('path')
+const exists = require('fs').existsSync
+const { log, installPlugins } = require('../../utils')
 
-async function main () {
-  const statusCommand = await executeCommand('npm', ['install', 'husky', '-D'])
 
-  if (!statusCommand) {
-    return
+class Husky {
+  constructor(childProcessPath) {
+    this.childProcessPath = childProcessPath || process.cwd()
   }
+
+  async init () {
+    await installPlugins('mock', this.childProcessPath)
+    await this.startWriteFileToHusky()
+    this.showStartUp()
+  }
+
+  async startWriteFileToHusky () {
+    const src = path.resolve(__dirname, '../../template/mock')
+    const dest = this.childProcessPath + (exists(this.childProcessPath + '/src') ? '/src/mock' : '/mock')
+
+    if (exists(dest)) {
+      throw new Error(chalk.red(`${dest} folder already exists，Please delete it`))
+    }
+
+    return fsExt.copy(src, dest)
+  }
+
+  showStartUp () {
+    log()
+    log(chalk.white(`🎉  Successfully created ${chalk.yellow('mock')}.`))
+    log(chalk.white('👉  Get started with the following: '))
+    log(chalk.green(`Import mock file at main entry，For example：${chalk.magenta("import './mock' ")}`))
+    log()
+  }
+
 }
 
-main()
+
+
+module.exports = Husky
