@@ -27,10 +27,6 @@ class Main {
     return this.status
   }
 
-  /**
-   * 是否存在相同文件夹
-   * @returns {Boolean}  是否删除文件夹
-   */
   async isExistsSameFolder () {
     if (exists(this.name)) {
       const { isRemoveSameFile } = await inquirer.isRemoveSameFile(this.name)
@@ -44,16 +40,10 @@ class Main {
     return true
   }
 
-  /**
-   * 设置用户配置
-   */
   async setOptions () {
     this.options = await inquirer.main()
   }
 
-  /**
-   * 下载 gitee 的 Demo
-   */
   async downloadDemo () {
     loading.start()
     try {
@@ -66,31 +56,26 @@ class Main {
     }
   }
 
-  /**
-   * 执行npm install
-   */
   async execNpmInstall () {
     await executeCommand('npm', ['install'], {
       cwd: process.cwd() + '/' + this.name
     })
   }
 
-  /**
-   * 注入插件: mock、husky
-   */
+  // TODO 工具正在建设中... 'husky', 'css-reset', 'axios-strong'
+  // mock ✅
+  // husky ❌
+  // css-reset ❌
+  // axios-strong ❌
   async injectPlugin () {
+    const childProcessPath = process.cwd() + '/' + this.name
     const defaultTools = ['mock']
     let tools = this.options.method === 'automatic' ? defaultTools : this.options.tools
 
-    // TODO 工具正在建设中... 'husky', 'css-reset', 'axios-strong'
-    // mock ✅ 
-    // husky ❌
-    // css-reset ❌
-    // axios-strong ❌
     for (let key in tools) {
-      require(`./add/${tools[key]}`)
+      const classFn = require(`./add/${tools[key]}`)
+      await new classFn(childProcessPath).init()
     }
-
   }
 }
 

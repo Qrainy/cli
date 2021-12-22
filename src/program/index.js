@@ -36,7 +36,8 @@ function commandAdd () {
         log()
         log(`📦  Installing ${chalk.cyan(plugin)}...`)
         log()
-        require('./add/' + plugin)
+        const classFn = require(`./add/${plugin}`)
+        new classFn().init()
       } catch (err) {
         log(err || (chalk.bgRed.white(' ERROR '), chalk.red("There is no such plug-in, Please don't be naughty 😝")))
       }
