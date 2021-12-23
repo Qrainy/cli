@@ -2,7 +2,7 @@ const exists = require('fs').existsSync
 const execa = require('execa')
 const chalk = require('chalk')
 const { hasNpm, hasPnpm, hasYarn } = require('./utils.env')
-
+const log = console.log
 
 /**
  * 执行命令
@@ -22,7 +22,11 @@ function executeCommand (command, args, options = {}) {
       .then(() => {
         resolve(true)
       })
-      .catch(() => {
+      .catch((err) => {
+        log()
+        log(chalk.bgRed.white(' ERROR COMMAND '), chalk.red(err.command))
+        log()
+        log(chalk.bgRedBright.white(' Are you crazy ?', 'Please Baidu or Google by yourself. '))
         reject(false)
       })
   })

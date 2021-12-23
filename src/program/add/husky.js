@@ -2,7 +2,7 @@ const chalk = require('chalk')
 const fsExt = require('fs-extra')
 const path = require('path')
 const exists = require('fs').existsSync
-const { log, installPlugins, executeCommand, getRootPath, is } = require('../../utils')
+const { log, installPlugins, executeCommand, getRootPath } = require('../../utils')
 
 class Husky {
   constructor(childProcessPath) {
