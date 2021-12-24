@@ -10,8 +10,8 @@ class Husky {
   }
 
   async init () {
-    await this.initGit()
     await this.setPackageFile()
+    await this.initGit()
     await this.executeScript()
     await this.startWriteFileToHusky()
     this.showStartUp()

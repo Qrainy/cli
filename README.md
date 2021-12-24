@@ -4,15 +4,15 @@ Span 脚手架
 
 #### 一期
 
-| 功能           | 命令                  | 描述                                           | 是否已实现 |
-| -------------- | --------------------- | ---------------------------------------------- | ---------- |
-| `create`       | span create `name`    | 创建项目: 暂时 `vue3.0+vite+ts` 生成的模版     | ✅         |
-| `husky`        | span add husky        | git 提交之前，对`暂存区`检查、`commit`提交规范 | ✅         |
-| `mock`         | span add mock         | 模拟数据                                       | ✅         |
-| `css-reset`    | span add css-reset    | 样式格式化                                     | ❌         |
-| `axios-strong` | span add axios-strong | 二次封装、规范 `api` 请求方式                  | ❌         |
+| 功能        | 命令               | 描述                                           | 是否已实现 |
+| ----------- | ------------------ | ---------------------------------------------- | ---------- |
+| `create`    | span create `name` | 创建项目: 暂时 `vue3.0+vite+ts` 生成的模版     | ✅         |
+| `husky`     | span add husky     | git 提交之前，对`暂存区`检查、`commit`提交规范 | ✅         |
+| `mock`      | span add mock      | 模拟数据                                       | ✅         |
+| `axios`     | span add axios     | 二次封装、规范 `api` 请求方式                  | ✅         |
+| `css-reset` | span add css-reset | 样式格式化                                     | ❌         |
 
-- 简易安装：直接使用`create` + 你的项目名称即可（包括`husky`、`mock`...，全功能）
+- 自动安装：包含以上全部功能，`husky`、`mock`、`axios`...
 - 手动安装：手动选择配置文件。
 
 #### 最终版本（TODO）
@@ -45,4 +45,10 @@ npm install -g span-cli
 
 ```
 span create name
+```
+
+运行一下命令开始创建子应用
+
+```
+span add <plugin>
 ```

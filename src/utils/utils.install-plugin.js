@@ -16,7 +16,6 @@ function executeCommand (command, args, options = {}) {
     stdio: 'inherit',
     ...options
   }
-
   return new Promise((resolve, reject) => {
     execa(command, args, options)
       .then(() => {
