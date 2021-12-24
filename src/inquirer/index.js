@@ -42,7 +42,7 @@ async function main () {
         type: 'checkbox',
         name: 'tools',
         message: 'Please select the tools you will install?',
-        choices: ['mock', 'husky', 'css-reset', 'axios-strong']
+        choices: ['mock', 'husky', 'css-reset', 'axios']
       }
     ])
 
