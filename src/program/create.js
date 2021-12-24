@@ -58,13 +58,13 @@ class Main {
     }
   }
 
-  // TODO 工具正在建设中... 'husky', 'css-reset', 'axios-strong'
+  // TODO 工具正在建设中...'css-reset'
   // mock ✅
   // husky ✅
+  // axios ✅
   // css-reset ❌
-  // axios-strong ❌
   async injectPlugin () {
-    const defaultTools = ['mock', 'husky']
+    const defaultTools = ['mock', 'husky', 'axios']
     let tools = this.options.method === 'automatic' ? defaultTools : this.options.tools
 
     for (let key in tools) {
